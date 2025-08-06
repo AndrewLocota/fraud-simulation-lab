@@ -3,4 +3,8 @@ libglib2.0-0
 libsm6
 libxext6
 libxrender-dev
-libgomp1 
+libgomp1
+poppler-utils
+poppler-data
+libpoppler-dev
+libpoppler-cpp-dev 

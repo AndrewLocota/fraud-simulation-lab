@@ -9,11 +9,14 @@ from PIL import Image
 # Set OpenCV to headless mode before importing anything that uses it
 os.environ['OPENCV_IO_ENABLE_OPENEXR'] = '0'
 
-# Try to import PDF processing
+# Try to import PDF processing  
 try:
     from pdf2image import convert_from_bytes
-    PDF_AVAILABLE = True
-except ImportError:
+    # Test if poppler is available
+    import subprocess
+    result = subprocess.run(['pdftoppm', '-h'], capture_output=True, text=True)
+    PDF_AVAILABLE = result.returncode == 0
+except (ImportError, FileNotFoundError, subprocess.SubprocessError):
     PDF_AVAILABLE = False
 
 # Import Augraphy with better error handling for cloud deployment
@@ -119,7 +122,8 @@ def load_pages(file) -> list[Image.Image]:
     """Load pages from uploaded file"""
     try:
         if file.type == "application/pdf" and PDF_AVAILABLE:
-            images = convert_from_bytes(file.read(), dpi=150)
+            # Use system-installed Poppler (no path needed)
+            images = convert_from_bytes(file.read(), dpi=200)
             return images
         elif file.type == "application/pdf":
             st.error("📄 PDF processing not available. Please use image files.")
