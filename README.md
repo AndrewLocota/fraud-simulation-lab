@@ -4,7 +4,7 @@ Transform genuine documents into realistic training datasets for fraud detection
 
 ## 🌐 Live Demo
 
-**Access the app**: [Your Streamlit Cloud URL will be here]
+**Access the app**: https://fraud-simulation-lab-oh5cd5tqtndgsnruxro3jr.streamlit.app/ (but it's a more Basic feature set)
 
 ## 🎯 Features
 
